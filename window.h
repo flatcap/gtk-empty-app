@@ -8,8 +8,7 @@ class Window : public Gtk::ApplicationWindow
 public:
 	explicit Window();
 
-private:
-	void on_action_something();
+protected:
 	void on_action_close();
 };
 
