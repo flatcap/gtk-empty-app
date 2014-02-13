@@ -1,28 +1,28 @@
-#include "exampleapplication.h"
-#include "examplewindow.h"
+#include "application.h"
+#include "window.h"
 #include <iostream>
 
-ExampleApplication::ExampleApplication() :
-	Gtk::Application("org.gtkmm.examples.application")
+Application::Application() :
+	Gtk::Application("org.gtkmm.s.application")
 {
-	Glib::set_application_name("Gtk::Application Example");
+	Glib::set_application_name("Gtk::Application ");
 }
 
-Glib::RefPtr<ExampleApplication> ExampleApplication::create()
+Glib::RefPtr<Application> Application::create()
 {
-	return Glib::RefPtr<ExampleApplication>(new ExampleApplication());
+	return Glib::RefPtr<Application>(new Application());
 }
 
-void ExampleApplication::on_startup()
+void Application::on_startup()
 {
 	//Call the base class's implementation:
 	Gtk::Application::on_startup();
 
 	//Create the Application menu:
 	//We can use add_action because Gtk::Application derives from ActionMap:
-	add_action("something", sigc::mem_fun(*this, &ExampleApplication::on_action_something));
-	add_action("copy",      sigc::mem_fun(*this, &ExampleApplication::on_action_edit));
-	add_action("quit",      sigc::mem_fun(*this, &ExampleApplication::on_action_quit));
+	add_action("something", sigc::mem_fun(*this, &Application::on_action_something));
+	add_action("copy",      sigc::mem_fun(*this, &Application::on_action_edit));
+	add_action("quit",      sigc::mem_fun(*this, &Application::on_action_quit));
 
 	Glib::RefPtr<Gio::Menu> app_menu = Gio::Menu::create();
 	app_menu->append("_Something", "app.something");
@@ -49,27 +49,27 @@ void ExampleApplication::on_startup()
 	set_menubar(win_menu);
 }
 
-void ExampleApplication::create_window()
+void Application::create_window()
 {
-	ExampleWindow* window = new ExampleWindow();
+	Window* window = new Window();
 	window->set_default_size(300, 100);
 
 	//Make sure that the application runs for as long this window is still open:
 	add_window(*window);
 
 	//Delete the window when it is hidden.
-	//That's enough for this simple example.
-	window->signal_hide().connect(sigc::bind<Gtk::Window*>(sigc::mem_fun(*this, &ExampleApplication::on_window_hide), window));
+	//That's enough for this simple .
+	window->signal_hide().connect(sigc::bind<Gtk::Window*>(sigc::mem_fun(*this, &Application::on_window_hide), window));
 
 	window->show();
 }
 
-void ExampleApplication::on_window_hide(Gtk::Window* window)
+void Application::on_window_hide(Gtk::Window* window)
 {
 	delete window;
 }
 
-void ExampleApplication::on_activate()
+void Application::on_activate()
 {
 	//std::cout << "debug1: " << G_STRFUNC << std::endl;
 	// The application has been started, so let's show a window.
@@ -78,17 +78,17 @@ void ExampleApplication::on_activate()
 	create_window();
 }
 
-void ExampleApplication::on_action_something()
+void Application::on_action_something()
 {
 	std::cout << G_STRFUNC << std::endl;
 }
 
-void ExampleApplication::on_action_edit()
+void Application::on_action_edit()
 {
 	std::cout << G_STRFUNC << std::endl;
 }
 
-void ExampleApplication::on_action_quit()
+void Application::on_action_quit()
 {
 	std::cout << G_STRFUNC << std::endl;
 	quit();

@@ -2,9 +2,9 @@ CC	= g++
 RM	= rm -fr
 MKDIR	= mkdir -p
 
-SRC	+= exampleapplication.cpp examplewindow.cpp main.cpp
+SRC	+= application.cpp window.cpp main.cpp
 
-HDR	+= exampleapplication.h examplewindow.h
+HDR	+= application.h window.h
 
 DEPDIR	= .dep
 OBJDIR	= .obj

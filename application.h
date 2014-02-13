@@ -1,18 +1,17 @@
-#ifndef _EXAMPLEAPPLICATION_H_
-#define _EXAMPLEAPPLICATION_H_
+#ifndef _APPLICATION_H_
+#define _APPLICATION_H_
 
 #include <gtkmm.h>
 
-class ExampleApplication: public Gtk::Application
+class Application: public Gtk::Application
 {
 protected:
-	ExampleApplication();
+	Application();
 
 public:
-	static Glib::RefPtr<ExampleApplication> create();
+	static Glib::RefPtr<Application> create();
 
 protected:
-	//Overrides of default signal handlers:
 	virtual void on_activate();
 	virtual void on_startup();
 
@@ -25,5 +24,5 @@ private:
 	void on_action_quit();
 };
 
-#endif // _EXAMPLEAPPLICATION_H_
+#endif // _APPLICATION_H_
 
